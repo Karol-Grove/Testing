@@ -1,0 +1,1231 @@
+/* ==========================================================================
+   KAROL GROVE — Mobile-First Premium Luxury E-Commerce Stylesheet
+   Preserves desktop completely while transforming mobile (<768px) into a
+   world-class D2C dry fruits & nuts shopping experience.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Desktop Default Resets & Safety (Ensures zero changes to desktop)
+   -------------------------------------------------------------------------- */
+.mobile-bottom-nav {
+  display: none;
+}
+.mobile-product-modal-backdrop {
+  display: none;
+}
+.mobile-menu-drawer-backdrop {
+  display: none;
+}
+.mobile-hero-container {
+  display: none;
+}
+.cinematic-video-section {
+  display: block;
+  padding: 60px 0;
+  background: #FAF8F5;
+}
+
+/* Base Card Pack Pills on Desktop (Clean inline selector) */
+.pack-size-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.pack-pill {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(18, 48, 32, 0.2);
+  background: #ffffff;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.pack-pill:hover,
+.pack-pill.active {
+  border-color: var(--forest);
+  background: var(--forest);
+  color: #ffffff;
+}
+
+/* Card Action Row */
+.card-buy-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+.card-qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid rgba(18, 48, 32, 0.2);
+  border-radius: 8px;
+  background: #FFFFFF;
+  overflow: hidden;
+  height: 38px;
+  flex-shrink: 0;
+}
+.card-qty-btn {
+  width: 32px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.card-qty-btn:active {
+  background: rgba(34, 107, 66, 0.12);
+}
+.card-qty-val {
+  min-width: 24px;
+  text-align: center;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 0 4px;
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE-FIRST TRANSFORMATION (< 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Prevent content hiding under sticky bottom navigation */
+  body {
+    padding-bottom: 74px !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     1. Mobile Header & Brand Bar
+     ------------------------------------------------------------------------ */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(14, 59, 46, 0.96) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(216, 147, 42, 0.25);
+    padding: 10px 14px !important;
+  }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .site-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .site-header .brand-logo-img {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  .site-header .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .site-header .brand-name {
+    font-family: var(--font-display);
+    font-size: 19px !important;
+    font-weight: 800;
+    color: #FFFFFF !important;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+  }
+  .site-header .brand-tagline {
+    font-size: 10px !important;
+    color: var(--gold) !important;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Hide Desktop Nav and desktop WhatsApp in header on mobile */
+  .main-nav,
+  .header-cta,
+  .nav-toggle {
+    display: none !important;
+  }
+
+  /* Header cart button */
+  .header-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-cart-btn {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(216, 147, 42, 0.4) !important;
+    color: #FFFFFF !important;
+    padding: 7px 12px !important;
+    border-radius: 20px !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  .header-cart-btn .cart-text {
+    display: none; /* Icon and badge only for clean mobile header */
+  }
+
+  /* ------------------------------------------------------------------------
+     2. Mobile Homepage Hierarchy
+     ------------------------------------------------------------------------ */
+  .hero-launch-wrapper {
+    display: none !important; /* Replaced by sleek dedicated mobile hero */
+  }
+  .mobile-hero-container {
+    display: block !important;
+    background: linear-gradient(180deg, #0E3B2E 0%, #082119 75%, #05140F 100%);
+    color: #FFFFFF;
+    padding: 30px 18px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+  .mobile-hero-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(216, 147, 42, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .mobile-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(216, 147, 42, 0.15);
+    border: 1px solid var(--gold);
+    color: #F8D98C;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .mobile-hero-badge .live-dot {
+    width: 7px;
+    height: 7px;
+    background: #FF3B30;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #FF3B30;
+    animation: pulseDot 1.5s infinite;
+  }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+  .mobile-hero-title {
+    font-family: var(--font-display);
+    font-size: 27px;
+    line-height: 1.22;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 8px;
+  }
+  .mobile-hero-title .highlight-gold {
+    color: var(--gold);
+    display: block;
+    font-size: 30px;
+  }
+  .mobile-hero-submsg {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #D3E0D8;
+    margin: 0 0 16px;
+    letter-spacing: 0.3px;
+  }
+  .mobile-hero-visual {
+    margin: 14px auto 20px;
+    max-width: 290px;
+    position: relative;
+  }
+  .mobile-hero-visual img {
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.45));
+    animation: floatVisual 4s ease-in-out infinite;
+  }
+  @keyframes floatVisual {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .mobile-hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .mobile-btn-primary {
+    background: linear-gradient(135deg, #d8932a 0%, #b07314 100%);
+    color: #123020 !important;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(216, 147, 42, 0.4);
+    border: none;
+  }
+  .mobile-btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  /* ------------------------------------------------------------------------
+     3. Mobile Category Bar (Horizontal Scrollable Chips)
+     ------------------------------------------------------------------------ */
+  .cat-nav-wrapper {
+    position: sticky;
+    top: 59px;
+    z-index: 990;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 10px 12px 12px;
+    margin: 0 -15px 20px -15px;
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+  .search-box-wrapper {
+    margin-bottom: 10px;
+  }
+  .search-box-wrapper input {
+    width: 100%;
+    padding: 10px 14px 10px 38px;
+    border-radius: 24px;
+    font-size: 13.5px;
+    border: 1.5px solid var(--border-light);
+    background: #F8F9FA;
+  }
+  .search-box-wrapper .search-icon {
+    left: 14px;
+    font-size: 14px;
+  }
+  .cat-nav {
+    display: flex !important;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 4px 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .cat-nav::-webkit-scrollbar {
+    display: none;
+  }
+  .cat-tab {
+    flex-shrink: 0;
+    padding: 8px 16px !important;
+    border-radius: 22px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #F3F4F6 !important;
+    color: var(--text-primary) !important;
+    border: 1.5px solid transparent !important;
+    transition: all 0.2s ease;
+  }
+  .cat-tab.active {
+    background: var(--forest) !important;
+    color: #FFFFFF !important;
+    border-color: var(--forest-deep) !important;
+    box-shadow: 0 3px 10px rgba(34, 107, 66, 0.3) !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     4. Mobile-First Product Cards (Generous, Clear, Scan-Friendly)
+     ------------------------------------------------------------------------ */
+  .product-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* 1 clean, prominent column on small mobile */
+    gap: 18px !important;
+    padding: 0 !important;
+  }
+  @media (min-width: 480px) and (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 16px !important;
+    }
+  }
+
+  .product-card {
+    background: #FFFFFF !important;
+    border: 1.5px solid var(--border-light) !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .product-card:active {
+    transform: scale(0.99);
+  }
+
+  .product-img-wrapper {
+    width: 100%;
+    height: 180px !important;
+    border-radius: 12px;
+    background: radial-gradient(circle, #FAF7EE 0%, #F0EAE1 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  .product-card-img {
+    max-height: 155px !important;
+    max-width: 90% !important;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  .product-img-wrapper:hover .product-card-img {
+    transform: scale(1.05);
+  }
+  .product-card .label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--terracotta);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Quick View / Details Tap Hint */
+  .quick-view-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(18, 48, 32, 0.75);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    pointer-events: none;
+  }
+
+  .product-card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .product-card-body h3 {
+    font-family: var(--font-display);
+    font-size: 18px !important;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
+    line-height: 1.25;
+    cursor: pointer;
+  }
+  .product-card-body p {
+    font-size: 13px !important;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0 0 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Pack Size Selector Pills */
+  .card-pack-wrapper {
+    margin: 4px 0 10px;
+  }
+  .card-pack-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .pack-size-pills {
+    display: flex;
+    gap: 8px;
+  }
+  .pack-pill {
+    flex: 1;
+    min-height: 38px;
+    padding: 8px 4px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(18, 48, 32, 0.18);
+    background: #FFFFFF;
+    color: var(--text-primary);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .pack-pill.active {
+    border-color: var(--forest);
+    background: var(--forest);
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(34, 107, 66, 0.25);
+  }
+
+  /* Hide raw select dropdown on mobile in favor of modern pills */
+  .variant-wrapper {
+    display: none !important;
+  }
+
+  /* Live Price Banner */
+  .card-live-price-tag {
+    display: flex !important;
+    align-items: baseline;
+    gap: 4px;
+    margin: 4px 0 12px;
+  }
+  .card-live-price-tag .price-curr {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--forest-deep);
+  }
+  .card-live-price-tag .price-val {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--forest-deep);
+    letter-spacing: -0.5px;
+  }
+  .card-live-price-tag .price-unit {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  /* Action Row: Stepper + Add to Cart */
+  .product-selector {
+    margin-top: auto;
+  }
+  .card-action-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  .card-qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid rgba(18, 48, 32, 0.25);
+    border-radius: 10px;
+    background: #FFFFFF;
+    height: 44px; /* Big touch target */
+    flex-shrink: 0;
+  }
+  .card-qty-btn {
+    width: 36px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-qty-btn:active {
+    background: rgba(34, 107, 66, 0.15);
+  }
+  .card-qty-val {
+    min-width: 28px;
+    text-align: center;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .add-to-order-btn {
+    flex: 1;
+    height: 44px;
+    background: linear-gradient(135deg, #1f5c3d 0%, #123020 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+    font-size: 13.5px !important;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.15s, background 0.2s;
+    box-shadow: 0 4px 12px rgba(18, 48, 32, 0.25);
+  }
+  .add-to-order-btn:active {
+    transform: scale(0.97);
+    background: #d8932a !important;
+    color: #123020 !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     5. Mobile Cinematic Video Section
+     ------------------------------------------------------------------------ */
+  .cinematic-video-section {
+    padding: 32px 16px !important;
+    background: #0E3B2E;
+    color: #FFFFFF;
+    border-top: 1px solid rgba(216, 147, 42, 0.3);
+    border-bottom: 1px solid rgba(216, 147, 42, 0.3);
+  }
+  .cinematic-video-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(216, 147, 42, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+  .cinematic-video-player-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+  }
+  .cinematic-video-player-wrap video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cinematic-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(216, 147, 42, 0.9);
+    border: 2px solid #FFFFFF;
+    color: #123020;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, background 0.2s;
+    z-index: 5;
+  }
+  .cinematic-play-btn.playing {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .cinematic-video-content {
+    padding: 20px 18px;
+    text-align: center;
+  }
+  .cinematic-eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .cinematic-video-content h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 8px;
+  }
+  .cinematic-video-content p {
+    font-size: 13.5px;
+    color: #D3E0D8;
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  /* ------------------------------------------------------------------------
+     6. Mobile Product Detail Modal / Sheet (Requirement 5)
+     ------------------------------------------------------------------------ */
+  .mobile-product-modal-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .mobile-product-modal-backdrop.open {
+    display: flex;
+    opacity: 1;
+  }
+  .mobile-product-sheet {
+    background: #FFFFFF;
+    width: 100%;
+    max-height: 88vh;
+    border-radius: 24px 24px 0 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 20px 30px;
+    position: relative;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.35);
+  }
+  .mobile-product-modal-backdrop.open .mobile-product-sheet {
+    transform: translateY(0);
+  }
+  .sheet-drag-handle {
+    width: 44px;
+    height: 5px;
+    border-radius: 3px;
+    background: #D1D5DB;
+    margin: 0 auto 16px;
+  }
+  .sheet-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    border: none;
+    font-size: 20px;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .modal-product-img-wrap {
+    width: 100%;
+    height: 220px;
+    background: radial-gradient(circle, #FAF7EE 0%, #EFE7DA 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .modal-product-img-wrap img {
+    max-height: 190px;
+    max-width: 85%;
+    object-fit: contain;
+  }
+  .modal-product-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #F59E0B;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .modal-product-rating span.review-count {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .modal-product-title {
+    font-family: var(--font-display);
+    font-size: 23px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+  }
+  .modal-product-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  /* Modal Pack Pill Row */
+  .modal-pack-section {
+    margin-bottom: 16px;
+  }
+  .modal-pack-label {
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .modal-pack-pills {
+    display: flex;
+    gap: 10px;
+  }
+  .modal-pack-pill {
+    flex: 1;
+    min-height: 42px;
+    border-radius: 10px;
+    border: 2px solid rgba(18, 48, 32, 0.2);
+    background: #FFFFFF;
+    color: var(--text-primary);
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .modal-pack-pill.active {
+    border-color: var(--forest);
+    background: var(--forest);
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(34, 107, 66, 0.25);
+  }
+
+  /* Modal Price & Quantity Row */
+  .modal-price-qty-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F8FAF9;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+  }
+  .modal-price-display {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .modal-price-display .curr {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--forest-deep);
+  }
+  .modal-price-display .amt {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--forest-deep);
+  }
+
+  /* Modal CTA Row */
+  .modal-cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .modal-add-cart-btn {
+    background: linear-gradient(135deg, #1f5c3d 0%, #123020 100%);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 10px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(18, 48, 32, 0.25);
+  }
+  .modal-buy-now-btn {
+    background: linear-gradient(135deg, #d8932a 0%, #b07314 100%);
+    color: #123020;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 10px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(216, 147, 42, 0.35);
+  }
+
+  /* Modal Accordion Sections */
+  .modal-accordions {
+    border-top: 1px solid var(--border-light);
+    margin-top: 8px;
+  }
+  .modal-acc-item {
+    border-bottom: 1px solid var(--border-light);
+  }
+  .modal-acc-header {
+    width: 100%;
+    padding: 14px 0;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: left;
+    cursor: pointer;
+  }
+  .modal-acc-header .acc-icon {
+    font-size: 16px;
+    color: var(--forest);
+    transition: transform 0.2s;
+  }
+  .modal-acc-item.open .acc-icon {
+    transform: rotate(180deg);
+  }
+  .modal-acc-body {
+    display: none;
+    padding: 0 0 14px 0;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .modal-acc-item.open .modal-acc-body {
+    display: block;
+  }
+
+  /* ------------------------------------------------------------------------
+     7. Mobile Cart Experience Overhaul (Requirements 10 & 11)
+     ------------------------------------------------------------------------ */
+  .floating-cart-btn {
+    display: none !important; /* Replaced by bottom bar cart */
+  }
+  .order-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 90vh !important;
+    top: auto !important;
+    bottom: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
+    transform: translateY(100%) !important;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4) !important;
+  }
+  .order-drawer.open {
+    transform: translateY(0) !important;
+  }
+  .drawer-header {
+    padding: 18px 20px !important;
+    border-bottom: 1px solid var(--border-light) !important;
+  }
+  .drawer-header h3 {
+    font-size: 18px !important;
+    color: var(--forest-deep) !important;
+    font-weight: 800 !important;
+  }
+  .drawer-body {
+    padding: 16px 20px !important;
+  }
+  .cart-item-row {
+    background: #FFFFFF !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+    margin-bottom: 12px !important;
+    display: grid !important;
+    grid-template-columns: 50px 1fr auto !important;
+    gap: 12px !important;
+    align-items: center !important;
+  }
+  .cart-item-thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: #FAF7EE;
+    object-fit: contain;
+    padding: 4px;
+  }
+  .cart-item-row .item-info h4 {
+    font-size: 14.5px !important;
+    color: var(--text-primary) !important;
+    font-weight: 700 !important;
+    margin: 0 0 3px !important;
+  }
+  .cart-item-row .item-info .variant {
+    font-size: 12px !important;
+    color: var(--forest) !important;
+    font-weight: 700 !important;
+    display: block !important;
+  }
+  .cart-item-row .item-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  .cart-item-row .item-controls button {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+  }
+  .cart-item-row .item-controls .qty {
+    font-size: 13.5px !important;
+    font-weight: 800 !important;
+  }
+  .drawer-footer {
+    padding: 16px 20px 24px !important;
+    border-top: 1px solid var(--border-light) !important;
+    background: #FAF8F5 !important;
+  }
+  .drawer-footer .btn-primary {
+    font-size: 15px !important;
+    padding: 15px 18px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(135deg, #16a085 0%, #0d6945 100%) !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     8. Mobile Sticky Bottom Navigation (HOME | SHOP | CART | PRICE | MENU)
+     ------------------------------------------------------------------------ */
+  .mobile-bottom-nav {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: rgba(14, 59, 46, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(216, 147, 42, 0.35);
+    z-index: 9999;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  }
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #D3E0D8;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 6px 10px;
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: color 0.2s;
+  }
+  .mobile-nav-item .nav-icon {
+    font-size: 20px;
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+  .mobile-nav-item.active {
+    color: var(--gold);
+  }
+  .mobile-nav-item.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 0 0 4px 4px;
+  }
+  .mobile-nav-cart-badge {
+    position: absolute;
+    top: 4px;
+    right: 14px;
+    background: #FF3B30;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 800;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .mobile-nav-cart-badge.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* ------------------------------------------------------------------------
+     9. Mobile Slide-Up Menu Sheet
+     ------------------------------------------------------------------------ */
+  .mobile-menu-drawer-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 10001;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .mobile-menu-drawer-backdrop.open {
+    display: flex;
+    opacity: 1;
+  }
+  .mobile-menu-sheet {
+    background: #0E3B2E;
+    color: #FFFFFF;
+    width: 100%;
+    border-radius: 24px 24px 0 0;
+    padding: 24px 20px 36px;
+    border-top: 2px solid var(--gold);
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .mobile-menu-drawer-backdrop.open .mobile-menu-sheet {
+    transform: translateY(0);
+  }
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 16px;
+  }
+  .mobile-menu-header h4 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--gold);
+    margin: 0;
+  }
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mobile-menu-links a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14.5px;
+    transition: background 0.2s;
+  }
+  .mobile-menu-links a:hover,
+  .mobile-menu-links a:active {
+    background: rgba(216, 147, 42, 0.15);
+    color: var(--gold);
+  }
+
+  /* ------------------------------------------------------------------------
+     10. General Mobile Polish (Typography, Padding, Spacing)
+     ------------------------------------------------------------------------ */
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .section {
+    padding: 40px 0 !important;
+  }
+  .page-header {
+    padding: 45px 16px 35px !important;
+  }
+  .page-header h1 {
+    font-size: 26px !important;
+  }
+  .launch-offers-banner {
+    padding: 24px 18px !important;
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .launch-offers-banner h2 {
+    font-size: 22px !important;
+  }
+  .section-final-cta {
+    padding: 40px 20px !important;
+    margin: 30px auto !important;
+  }
+  .section-final-cta h2 {
+    font-size: 24px !important;
+  }
+}
