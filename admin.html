@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal | Karol Grove Price & Product Management</title>
+    <link rel="icon" href="assets/karol-grove-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css?v=20261002-v20">
+    <link rel="stylesheet" href="assets/mobile-premium.css?v=20261005">
+    <style>
+        :root {
+            --admin-bg: #F4F7F5;
+            --admin-card: #FFFFFF;
+            --admin-text: #123020;
+            --admin-border: #E2E8E4;
+            --admin-primary: #1F5C3D;
+            --admin-gold: #D8932A;
+        }
+        body.dark-mode {
+            --admin-bg: #0A1C14;
+            --admin-card: #11281E;
+            --admin-text: #E5EFE8;
+            --admin-border: #1E3D30;
+        }
+        body {
+            background: var(--admin-bg);
+            color: var(--admin-text);
+            font-family: var(--font-body);
+            padding: 24px 16px 80px;
+            margin: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+        .admin-wrap {
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+        .admin-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            padding: 20px 28px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .admin-header-bar h1 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            margin: 0;
+            color: var(--admin-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-header-bar h1 img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+        .admin-top-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn-admin {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.15s, opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-admin:active {
+            transform: scale(0.98);
+        }
+        .btn-admin-primary {
+            background: var(--admin-primary);
+            color: #FFFFFF;
+        }
+        .btn-admin-gold {
+            background: linear-gradient(135deg, #d8932a 0%, #b07314 100%);
+            color: #123020;
+            font-weight: 800;
+        }
+        .btn-admin-sync {
+            background: linear-gradient(135deg, #16a085 0%, #0d6945 100%);
+            color: #FFFFFF;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(22, 160, 133, 0.35);
+        }
+        .btn-admin-danger {
+            background: #E74C3C;
+            color: #FFFFFF;
+        }
+        .btn-admin-outline {
+            background: transparent;
+            border: 1.5px solid var(--admin-border);
+            color: var(--admin-text);
+        }
+
+        /* Git Sync Auth Box */
+        .git-auth-box {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+        .git-auth-box h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--admin-primary);
+            margin: 0 0 8px;
+        }
+        .git-auth-box p {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            margin: 0 0 16px;
+        }
+        .auth-fields-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .auth-field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: var(--admin-text);
+        }
+        .auth-field input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--admin-border);
+            background: rgba(0,0,0,0.02);
+            color: var(--admin-text);
+            font-family: var(--font-body);
+            font-size: 13.5px;
+            outline: none;
+            box-sizing: border-box;
+        }
+        body.dark-mode .auth-field input {
+            background: rgba(255,255,255,0.05);
+        }
+        .auth-field input:focus {
+            border-color: var(--admin-gold);
+        }
+
+        /* Action Toolbar */
+        .toolbar-strip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .search-filter-group {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 600px;
+            flex-wrap: wrap;
+        }
+        .search-filter-group input {
+            flex: 1;
+            min-width: 220px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--admin-border);
+            background: var(--admin-card);
+            color: var(--admin-text);
+            font-size: 13.5px;
+            outline: none;
+        }
+        .search-filter-group select {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--admin-border);
+            background: var(--admin-card);
+            color: var(--admin-text);
+            font-size: 13.5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Status Banner */
+        .status-box {
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .status-box.success {
+            display: block;
+            background: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+        .status-box.error {
+            display: block;
+            background: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+        .status-box.info {
+            display: block;
+            background: #D1ECF1;
+            color: #0C5460;
+            border: 1px solid #BEE5EB;
+        }
+
+        /* Products Table & Card UI */
+        .table-wrap {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            margin-bottom: 30px;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+        .admin-table th {
+            background: var(--admin-primary);
+            color: #FFFFFF;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .admin-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--admin-border);
+            vertical-align: middle;
+        }
+        .admin-table tr:hover {
+            background: rgba(31, 92, 61, 0.03);
+        }
+        body.dark-mode .admin-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .admin-table input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            background: transparent;
+            font-family: var(--font-body);
+            color: var(--admin-text);
+            font-size: 13.5px;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+        .admin-table input:focus {
+            border-color: var(--admin-gold);
+            background: rgba(216, 147, 42, 0.08);
+            outline: none;
+        }
+        .price-input-cell {
+            max-width: 105px;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 800;
+            cursor: pointer;
+            user-select: none;
+        }
+        .status-badge.active {
+            background: rgba(34, 107, 66, 0.15);
+            color: #1F5C3D;
+        }
+        .status-badge.outofstock {
+            background: rgba(231, 76, 60, 0.15);
+            color: #C0392B;
+        }
+        .action-del-btn {
+            background: transparent;
+            border: none;
+            color: #E74C3C;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+        .action-del-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        /* Password Overlay */
+        #admin-login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0E3B2E;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+        .login-card {
+            background: #11281E;
+            border: 1.5px solid var(--admin-gold);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .auth-fields-grid {
+                grid-template-columns: 1fr;
+            }
+            .admin-table {
+                display: block;
+                overflow-x: auto;
+            }
+            .admin-header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Password Protection Overlay -->
+    <div id="admin-login-overlay">
+        <div class="login-card">
+            <img src="assets/karol-grove-icon.png" alt="Karol Grove" style="width: 58px; height: 58px; border-radius: 12px; margin-bottom: 16px;">
+            <h2 style="font-family: var(--font-display); font-size: 24px; color: var(--admin-gold); margin: 0 0 8px;">Karol Grove Admin</h2>
+            <p style="font-size: 13.5px; color: #D3E0D8; margin: 0 0 24px;">Enter portal password to manage live product prices &amp; inventory.</p>
+            <input type="password" id="admin-password-input" placeholder="Enter Admin Password" style="width: 100%; padding: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.08); color: #fff; font-size: 15px; text-align: center; margin-bottom: 16px; outline: none; box-sizing: border-box;">
+            <button id="admin-login-btn" class="btn-admin btn-admin-gold" style="width: 100%; padding: 14px; font-size: 15px; justify-content: center;">
+                🔓 Unlock Admin Portal
+            </button>
+            <p id="admin-login-error" style="color: #FF6B6B; font-weight: 700; margin-top: 14px; font-size: 13px; display: none;">Incorrect Password. Please try again.</p>
+        </div>
+    </div>
+
+    <div class="admin-wrap">
+        <!-- Top Bar -->
+        <div class="admin-header-bar">
+            <h1>
+                <img src="assets/karol-grove-icon.png" alt="Logo">
+                Price &amp; Product Management
+            </h1>
+            <div class="admin-top-actions">
+                <a href="index.html" class="btn-admin btn-admin-outline" target="_blank">🌐 View Website</a>
+                <button class="btn-admin btn-admin-outline" id="dark-mode-toggle">🌓 Toggle Dark Mode</button>
+            </div>
+        </div>
+
+        <!-- Git Sync & Credentials Box (Requirements 6, 7 & 8) -->
+        <div class="git-auth-box">
+            <h3>⚡ Direct GitHub Synchronization</h3>
+            <p>Edit prices below, then save locally or push directly to GitHub. Once synced, GitHub Pages automatically deploys updated prices to customers within 1–2 minutes.</p>
+            <div class="auth-fields-grid">
+                <div class="auth-field">
+                    <label>GitHub Repository (owner/repo)</label>
+                    <input type="text" id="github-repo" placeholder="e.g. pravieen/karol-grove-website">
+                </div>
+                <div class="auth-field">
+                    <label>Personal Access Token (PAT)</label>
+                    <input type="password" id="github-pat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn-admin btn-admin-sync" id="sync-btn">
+                    <span>🔄 SYNC TO WEBSITE</span>
+                </button>
+                <button class="btn-admin btn-admin-primary" id="save-local-btn">
+                    <span>💾 Save Local Draft</span>
+                </button>
+                <button class="btn-admin btn-admin-outline" id="reset-local-btn">
+                    <span>🔄 Reset to Git Defaults</span>
+                </button>
+                <button class="btn-admin btn-admin-gold" id="add-product-btn">
+                    <span>➕ Add New Product</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Message Banner -->
+        <div id="status" class="status-box"></div>
+
+        <!-- Search & Category Filters -->
+        <div class="toolbar-strip">
+            <div class="search-filter-group">
+                <input type="text" id="product-search-input" placeholder="🔍 Search product name or category...">
+                <select id="category-filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="Nuts">🌰 Nuts</option>
+                    <option value="Dates">🌴 Dates</option>
+                    <option value="Dried Fruits">🍇 Dried Fruits</option>
+                    <option value="Seeds">🌱 Seeds</option>
+                    <option value="Sweeteners & Others">🍯 Sweeteners & Others</option>
+                    <option value="Gift Packs">🎁 Gift Packs</option>
+                </select>
+            </div>
+            <div style="font-size: 13.5px; font-weight: 700; color: var(--text-secondary);" id="product-count-label">
+                Showing 0 products
+            </div>
+        </div>
+
+        <!-- Simple Product Table UI (Requirement 7) -->
+        <!-- Product | 250g | 500g | 1kg | Status | Actions -->
+        <div class="table-wrap">
+            <table class="admin-table" id="price-table">
+                <thead>
+                    <tr>
+                        <th style="width: 140px;">Category</th>
+                        <th>Product Name</th>
+                        <th class="price-input-cell">250g (₹)</th>
+                        <th class="price-input-cell">500g (₹)</th>
+                        <th class="price-input-cell">1kg (₹)</th>
+                        <th style="width: 110px;">Status</th>
+                        <th style="width: 80px; text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="product-rows-body">
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Load the source prices data -->
+    <script src="assets/prices.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Password Protection Logic
+            const overlay = document.getElementById('admin-login-overlay');
+            const passInput = document.getElementById('admin-password-input');
+            const loginBtn = document.getElementById('admin-login-btn');
+            const errorMsg = document.getElementById('admin-login-error');
+
+            if (sessionStorage.getItem('admin_unlocked') === 'true') {
+                overlay.style.display = 'none';
+            }
+
+            const checkPassword = () => {
+                if (passInput.value === '@dm!nl0gin') {
+                    sessionStorage.setItem('admin_unlocked', 'true');
+                    overlay.style.display = 'none';
+                } else {
+                    errorMsg.style.display = 'block';
+                    passInput.value = '';
+                }
+            };
+
+            loginBtn.addEventListener('click', checkPassword);
+            passInput.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') checkPassword();
+            });
+
+            // Dark Mode toggle
+            const darkModeBtn = document.getElementById('dark-mode-toggle');
+            darkModeBtn.addEventListener('click', () => document.body.classList.toggle('dark-mode'));
+
+            const tableBody = document.getElementById('product-rows-body');
+            const searchInput = document.getElementById('product-search-input');
+            const catSelect = document.getElementById('category-filter-select');
+            const countLabel = document.getElementById('product-count-label');
+            const statusDiv = document.getElementById('status');
+
+            let products = [];
+            let currentFilterCat = 'all';
+            let currentSearchTerm = '';
+
+            function loadProducts() {
+                const cached = localStorage.getItem('kg_prices_local');
+                if (cached) {
+                    try {
+                        products = JSON.parse(cached);
+                    } catch(e) {
+                        products = window.priceListData ? JSON.parse(JSON.stringify(window.priceListData)) : [];
+                    }
+                } else {
+                    products = window.priceListData ? JSON.parse(JSON.stringify(window.priceListData)) : [];
+                }
+
+                // Ensure each product has status
+                products.forEach(p => {
+                    if (!p.status) p.status = 'Active';
+                });
+            }
+
+            function renderTable() {
+                tableBody.innerHTML = '';
+
+                const filtered = products.filter(p => {
+                    const catMatch = (currentFilterCat === 'all' || p.category === currentFilterCat);
+                    const nameMatch = (p.name || '').toLowerCase().includes(currentSearchTerm) ||
+                                      (p.category || '').toLowerCase().includes(currentSearchTerm);
+                    return catMatch && nameMatch;
+                });
+
+                countLabel.textContent = `Showing ${filtered.length} of ${products.length} products`;
+
+                if (filtered.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                                No products match your filter. Click "Add New Product" to create one.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                filtered.forEach(p => {
+                    const realIndex = products.indexOf(p);
+                    const tr = document.createElement('tr');
+                    const isActive = (p.status || 'Active') === 'Active';
+
+                    tr.innerHTML = `
+                        <td>
+                            <input type="text" value="${p.category || ''}" data-index="${realIndex}" data-field="category">
+                        </td>
+                        <td>
+                            <input type="text" value="${p.name || ''}" data-index="${realIndex}" data-field="name" style="font-weight: 700;">
+                        </td>
+                        <td class="price-input-cell">
+                            <input type="number" value="${p.price250g !== undefined ? p.price250g : ''}" data-index="${realIndex}" data-field="price250g" placeholder="₹">
+                        </td>
+                        <td class="price-input-cell">
+                            <input type="number" value="${p.price500g !== undefined ? p.price500g : ''}" data-index="${realIndex}" data-field="price500g" placeholder="₹">
+                        </td>
+                        <td class="price-input-cell">
+                            <input type="number" value="${p.price1kg !== undefined ? p.price1kg : ''}" data-index="${realIndex}" data-field="price1kg" placeholder="₹">
+                        </td>
+                        <td>
+                            <span class="status-badge ${isActive ? 'active' : 'outofstock'}" data-index="${realIndex}">
+                                ${isActive ? '● Active' : '○ Out of Stock'}
+                            </span>
+                        </td>
+                        <td style="text-align: center;">
+                            <button type="button" class="action-del-btn" data-index="${realIndex}" title="Remove Product">🗑️</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            loadProducts();
+            renderTable();
+
+            // Search & Category Filters
+            searchInput.addEventListener('input', (e) => {
+                currentSearchTerm = e.target.value.toLowerCase().trim();
+                renderTable();
+            });
+            catSelect.addEventListener('change', (e) => {
+                currentFilterCat = e.target.value;
+                renderTable();
+            });
+
+            // Table input change handler
+            tableBody.addEventListener('input', (e) => {
+                if(e.target.tagName === 'INPUT') {
+                    const index = parseInt(e.target.getAttribute('data-index'), 10);
+                    const field = e.target.getAttribute('data-field');
+                    const val = e.target.value.trim();
+                    if (field.startsWith('price')) {
+                        products[index][field] = val === '' ? '' : (isNaN(Number(val)) ? val : Number(val));
+                    } else {
+                        products[index][field] = val;
+                    }
+                }
+            });
+
+            // Status toggle and Delete button clicks
+            tableBody.addEventListener('click', (e) => {
+                const badge = e.target.closest('.status-badge');
+                if (badge) {
+                    const index = parseInt(badge.getAttribute('data-index'), 10);
+                    products[index].status = products[index].status === 'Active' ? 'Out of Stock' : 'Active';
+                    renderTable();
+                    return;
+                }
+
+                const delBtn = e.target.closest('.action-del-btn');
+                if (delBtn) {
+                    const index = parseInt(delBtn.getAttribute('data-index'), 10);
+                    if (confirm(`Are you sure you want to remove "${products[index].name}"?`)) {
+                        products.splice(index, 1);
+                        renderTable();
+                    }
+                }
+            });
+
+            // Add Product Button
+            document.getElementById('add-product-btn').addEventListener('click', () => {
+                const newName = prompt('Enter new Product Name:');
+                if (!newName) return;
+                const newCat = prompt('Enter Category (Nuts, Dates, Dried Fruits, Seeds, Sweeteners & Others, Gift Packs):', 'Nuts') || 'Nuts';
+                const p250 = prompt('250g Price in ₹ (optional):', '') || '';
+                const p500 = prompt('500g Price in ₹ (optional):', '') || '';
+                const p1kg = prompt('1kg Price in ₹ (optional):', '') || '';
+
+                products.unshift({
+                    category: newCat,
+                    name: newName,
+                    price250g: p250 ? Number(p250) : '',
+                    price500g: p500 ? Number(p500) : '',
+                    price1kg: p1kg ? Number(p1kg) : '',
+                    status: 'Active'
+                });
+                renderTable();
+            });
+
+            // Save Local Draft
+            document.getElementById('save-local-btn').addEventListener('click', () => {
+                localStorage.setItem('kg_prices_local', JSON.stringify(products));
+                window.dispatchEvent(new CustomEvent('kg_prices_changed'));
+                statusDiv.className = 'status-box success';
+                statusDiv.innerText = '✅ Saved locally! All open Karol Grove pages (Home, Products, Cart) updated immediately.';
+            });
+
+            // Reset Defaults
+            document.getElementById('reset-local-btn').addEventListener('click', () => {
+                if(confirm('Are you sure you want to discard your edits and reset back to original Git defaults?')) {
+                    localStorage.removeItem('kg_prices_local');
+                    loadProducts();
+                    renderTable();
+                    window.dispatchEvent(new CustomEvent('kg_prices_changed'));
+                    statusDiv.className = 'status-box info';
+                    statusDiv.innerText = '🔄 Reset to original Git defaults.';
+                }
+            });
+
+            // Restore GitHub credentials
+            if(localStorage.getItem('kg_repo')) {
+                document.getElementById('github-repo').value = localStorage.getItem('kg_repo');
+            }
+            if(localStorage.getItem('kg_pat')) {
+                document.getElementById('github-pat').value = localStorage.getItem('kg_pat');
+            }
+
+            // Git Sync Logic (Requirement 7 & 8)
+            document.getElementById('sync-btn').addEventListener('click', async () => {
+                const repo = document.getElementById('github-repo').value.trim();
+                const pat = document.getElementById('github-pat').value.trim();
+
+                if(!repo || !pat) {
+                    statusDiv.className = 'status-box error';
+                    statusDiv.innerText = '⚠ Sync failed — Please provide both GitHub Repository and PAT Token.';
+                    return;
+                }
+
+                // Save credentials in browser localStorage
+                localStorage.setItem('kg_repo', repo);
+                localStorage.setItem('kg_pat', pat);
+
+                statusDiv.className = 'status-box info';
+                statusDiv.innerText = '🔄 Syncing prices directly to GitHub repository...';
+
+                try {
+                    // 1. Generate JS file content
+                    const cleanProducts = products.map(p => ({
+                        category: p.category,
+                        name: p.name,
+                        price250g: p.price250g !== undefined && p.price250g !== '' ? Number(p.price250g) : '',
+                        price500g: p.price500g !== undefined && p.price500g !== '' ? Number(p.price500g) : '',
+                        price1kg: p.price1kg !== undefined && p.price1kg !== '' ? Number(p.price1kg) : '',
+                        status: p.status || 'Active'
+                    }));
+
+                    const jsContent = `/**\n * Karol Grove — Weekly Price List Data\n * Automatically synced via Karol Grove Admin Portal\n */\n\nwindow.priceListData = ${JSON.stringify(cleanProducts, null, 2)};\n`;
+                    const encodedContent = btoa(unescape(encodeURIComponent(jsContent)));
+
+                    // 2. Fetch current file SHA
+                    let filePath = 'assets/prices.js';
+                    let apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+                    let getRes = await fetch(apiUrl, {
+                        headers: { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' }
+                    });
+                    
+                    let sha = '';
+                    if (getRes.status === 404) {
+                        const fallbackPath = 'karol-grove/assets/prices.js';
+                        const fallbackRes = await fetch(`https://api.github.com/repos/${repo}/contents/${fallbackPath}`, {
+                            headers: { 'Authorization': `token ${pat}`, 'Accept': 'application/vnd.github.v3+json' }
+                        });
+                        if (fallbackRes.ok) {
+                            filePath = fallbackPath;
+                            apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+                            const data = await fallbackRes.json();
+                            sha = data.sha;
+                        }
+                    } else if (getRes.ok) {
+                        const data = await getRes.json();
+                        sha = data.sha;
+                    }
+
+                    // 3. Commit and Push to GitHub
+                    const putRes = await fetch(apiUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${pat}`,
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/vnd.github.v3+json'
+                        },
+                        body: JSON.stringify({
+                            message: 'Admin Portal: Updated prices across website',
+                            content: encodedContent,
+                            sha: sha || undefined
+                        })
+                    });
+
+                    if(putRes.ok) {
+                        localStorage.setItem('kg_prices_local', JSON.stringify(cleanProducts));
+                        window.dispatchEvent(new CustomEvent('kg_prices_changed'));
+                        statusDiv.className = 'status-box success';
+                        statusDiv.innerText = '✓ Successfully synced prices! The live website and GitHub Pages will deploy this update automatically.';
+                    } else {
+                        const errData = await putRes.json();
+                        throw new Error(errData.message || 'Failed to push to GitHub');
+                    }
+
+                } catch(err) {
+                    statusDiv.className = 'status-box error';
+                    statusDiv.innerText = `⚠ Sync failed — try again: ${err.message}`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
